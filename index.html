@@ -1,20 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Título</title>
-    <link rel="stylesheet" href="main.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+  <title>Título</title>
+  <link rel="stylesheet" href="main.css">
 </head>
+
 <body>
-    <h1>Task Timeline</h1>
-    <p id="date"></p>
-    <ul>
-      <li class="list">Edit the head</li>
-      <li class="list">Edit the bodyyyy</li>
-      <li>Link to JavaScript</li>
+  <nav class="navbar navbar-dark bg-secondary text-white" ">
+    <a class=" navbar-brand col-sm-3 col-md-2 mr-0 " href=" # ">Logo ujap aquí</a>
+    <ul class=" navbar-nav ">
+      <li class=" nav-item ">
+        <a class=" nav-link " href=" # ">Sign out</a>
+      </li>
     </ul>
-    <script src="app.js"></script>
+  </nav>
+  <div class=" fill container-fluid bg-dark text-white ">
+    <div class=" row ">
+      <div class=" col-md-4 ">
+      <h3>Ecuaciones</h3>
+      <div class=" list-group text-dark " id=" list-group ">
+      <a class=" list-group-item clearfix " onclick=" alert( 'Action2 -> Details' ); ">
+        Ecuación 0
+        <span class=" pull-right ">
+            <span class=" btn btn-xs btn-default " onclick=" alert( 'Action2 -> Play' ); event.stopPropagation(); ">
+                <button class=" btn-danger ">X</button></span>
+            </span>
+        </span>
+      </a>
+      </div>
+      </div>
+  <div class=" col ">
+    <input type=" text " class=" form-control " placeholder=" Buscar ">
+  </div>
+    </div>
+    <button id=" enter ">Add Element</button>
+  </div>
+    <script src=" app.js "></script>
     <noscript>You need to enable JavaScript to view the full site.</noscript>
 </body>
 </html>
