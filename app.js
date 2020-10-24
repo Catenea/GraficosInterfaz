@@ -1,17 +1,18 @@
+
 var ec_quantity = 0;
-
-
-var button = document.getElementById("enter");
+var Createbutton = document.getElementById("enter");
 var ul = document.getElementById("list-group");
+var ECUATION = "NULL";
+var EcuationInput = document.getElementById("EcInput")
+var ECUATION_LIST = [];
 
-button.addEventListener("click", function () {
-  ec_quantity += 1;
+Createbutton.addEventListener("click", function () {
+  var valid = validateEcuation();
+  if (valid == true) {
+    ec_quantity += 1;
   var a = document.createElement("a");
-  a.className = "list-group-item clearfix";
-  a.onclick = function () {
-    alert(`Hola en ${ec_quantity}`)
-  }
-  a.appendChild(document.createTextNode(`Ecuación ${ec_quantity}`));
+  a.className = "list-group-item clearfix ecuation-item";
+  a.appendChild(document.createTextNode(`${ECUATION}`));
   var rightArea = document.createElement("span");
   rightArea.className = "pull-right";
   var buttonArea = document.createElement("span");
@@ -26,4 +27,58 @@ button.addEventListener("click", function () {
   rightArea.appendChild(buttonArea);
   a.appendChild(rightArea);
   ul.appendChild(a);
+  plot();
+  }else{
+    alert("Por favor ingrese una función válida")
+  }
+  
 })
+
+EcuationInput.addEventListener("input", updateName)
+ 
+function updateName() {
+  ECUATION = document.getElementById("EcInput").value;
+  // console.log(math.eval(ECUATION));
+  var code = math.compile(ECUATION)
+  console.log(code.eval());
+}
+
+function validateEcuation() {
+  try {
+    plot()
+    return true;
+  } catch (error) {
+    console.log("nope");
+    return false;
+  }
+  
+}
+
+var parameters = {
+  target: '#myFunction',
+  data: [{
+    fn: 'sin(x)', 
+    color: 'red'
+ }],
+  grid: true,
+  yAxis: {domain: [-1, 1]},
+  xAxis: {domain: [0, 2*Math.PI]}
+};
+
+function plot() {
+  console.log(ECUATION);
+  var f = ECUATION
+  var xMin = -5
+  var xMax = 5
+  var yMin = -5
+  var yMax = 5
+  var color = document.getElementById("color").value;
+  
+  parameters.data[0].fn = f;
+  parameters.xAxis.domain = [xMin, xMax];
+  parameters.yAxis.domain = [yMin, yMax];
+  parameters.data[0].color = color;
+  
+  functionPlot(parameters);
+}
+
