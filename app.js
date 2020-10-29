@@ -10,19 +10,29 @@ Createbutton.addEventListener("click", function () {
   var valid = validateEcuation();
   if (valid == true) {
     ec_quantity += 1;
+  
+  var ecu = ECUATION
   var a = document.createElement("a");
+  ECUATION_LIST.push(ECUATION);
   a.className = "list-group-item clearfix ecuation-item";
   a.appendChild(document.createTextNode(`${ECUATION}`));
   var rightArea = document.createElement("span");
   rightArea.className = "pull-right";
   var buttonArea = document.createElement("span");
   buttonArea.className = "btn btn-xs btn-default";
-  buttonArea.onclick = function () {
-    alert(`Eliminando a ${ec_quantity}`)
-  }
   var deleteButton = document.createElement("button");
   deleteButton.className = "btn-danger";
-  deleteButton.appendChild(document.createTextNode("X"))
+  deleteButton.appendChild(document.createTextNode("X"));
+  deleteButton.onclick = function () {
+    alert(`Eliminando a ${ec_quantity}`)
+  }
+  var viewButton = document.createElement("button");
+  viewButton.className = "btn-primary view-button";
+  viewButton.appendChild(document.createTextNode("Ver"))
+  viewButton.onclick = function () {
+    plot(ecu)
+  }
+  buttonArea.appendChild(viewButton);
   buttonArea.appendChild(deleteButton);
   rightArea.appendChild(buttonArea);
   a.appendChild(rightArea);
@@ -38,7 +48,6 @@ EcuationInput.addEventListener("input", updateName)
  
 function updateName() {
   ECUATION = document.getElementById("EcInput").value;
-  // console.log(math.eval(ECUATION));
   var code = math.compile(ECUATION)
   console.log(code.eval());
 }
@@ -65,9 +74,14 @@ var parameters = {
   xAxis: {domain: [0, 2*Math.PI]}
 };
 
-function plot() {
-  console.log(ECUATION);
-  var f = ECUATION
+function plot(ec = null) {
+  // console.log("Ploteando ", ec);
+  if (ec != null) {
+    var f = ec
+  } else {
+    var f = ECUATION
+  }
+  
   var xMin = -5
   var xMax = 5
   var yMin = -5
