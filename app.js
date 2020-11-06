@@ -10,35 +10,37 @@ Createbutton.addEventListener("click", function () {
   var valid = validateEcuation();
   if (valid == true) {
     ec_quantity += 1;
-  
-  var ecu = ECUATION
-  var a = document.createElement("a");
-  ECUATION_LIST.push(ECUATION);
-  a.className = "list-group-item clearfix ecuation-item";
-  a.appendChild(document.createTextNode(`${ECUATION}`));
-  var rightArea = document.createElement("span");
-  rightArea.className = "pull-right";
-  var buttonArea = document.createElement("span");
-  buttonArea.className = "btn btn-xs btn-default";
-  var deleteButton = document.createElement("button");
-  deleteButton.className = "btn-danger";
-  deleteButton.appendChild(document.createTextNode("X"));
-  deleteButton.onclick = function () {
-    alert(`Eliminando a ${ec_quantity}`)
-  }
-  var viewButton = document.createElement("button");
-  viewButton.className = "btn-primary view-button";
-  viewButton.appendChild(document.createTextNode("Ver"))
-  viewButton.onclick = function () {
-    plot(ecu)
-  }
-  buttonArea.appendChild(viewButton);
-  buttonArea.appendChild(deleteButton);
-  rightArea.appendChild(buttonArea);
-  a.appendChild(rightArea);
-  ul.appendChild(a);
-  plot();
-  }else{
+    var ecu = ECUATION
+    var index = ec_quantity
+    var a = document.createElement("a");
+    ECUATION_LIST.push(ECUATION);
+    a.className = "list-group-item clearfix ecuation-item";
+    a.id = `ecuation_${ec_quantity}`
+    a.appendChild(document.createTextNode(`${ECUATION}`));
+    var rightArea = document.createElement("span");
+    rightArea.className = "pull-right";
+    var buttonArea = document.createElement("span");
+    buttonArea.className = "btn btn-xs btn-default";
+    var deleteButton = document.createElement("button");
+    deleteButton.className = "btn-danger";
+    deleteButton.appendChild(document.createTextNode("X"));
+    deleteButton.onclick = function () {
+      var ecuation_id = document.getElementById(`ecuation_${index}`)
+      ecuation_id.parentNode.removeChild(ecuation_id)
+    }
+    var viewButton = document.createElement("button");
+    viewButton.className = "btn-primary view-button";
+    viewButton.appendChild(document.createTextNode("Ver"))
+    viewButton.onclick = function () {
+      plot(ecu)
+    }
+    buttonArea.appendChild(viewButton);
+    buttonArea.appendChild(deleteButton);
+    rightArea.appendChild(buttonArea);
+    a.appendChild(rightArea);
+    ul.appendChild(a);
+    plot();
+  } else {
     alert("Por favor ingrese una función válida")
   }
   

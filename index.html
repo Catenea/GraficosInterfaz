@@ -20,7 +20,7 @@
     <img src="Logo-UJAP2.png" alt="Girl in a jacket" width="60" height="60">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="#">Cerrar Sesión</a>
+        <a class="nav-link" href="#" id="logout-button">Cerrar Sesión</a>
       </li>
     </ul>
   </nav>
@@ -45,6 +45,35 @@
     <script type = "module" src=" app.js "></script>
     <script src="https://mauriciopoppe.github.io/function-plot/js/function-plot.js"></script>
     <noscript>You need to enable JavaScript to view the full site.</noscript>
-</body>
 
-</html>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+      https://firebase.google.com/docs/web/setup#available-libraries -->
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyBPc-gITXdGrJDozXHHJSqmuQ7WHgC3CPk",
+      authDomain: "graficar-ecuaciones.firebaseapp.com",
+      databaseURL: "https://graficar-ecuaciones.firebaseio.com",
+      projectId: "graficar-ecuaciones",
+      appId: "1:748495407417:web:e4cd55ec36522219d100e8"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    //Make Auth and Firebase references
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    //Actualizar settings
+    db.settings({timestampsInSnapshots: true})
+
+  </script>
+  
+
+</body>
