@@ -8,21 +8,23 @@ var ECUATION_LIST = [];
 var registerField = document.getElementById("registerEmail")
 const loggedOutLinks = document.querySelectorAll('.logged-out');
 const loggedInLinks = document.querySelectorAll('.logged-in');
+var CURRENT_USER = null
 
 //Listen auth state changes
 auth.onAuthStateChanged(user => {
   if (user) {
+    CURRENT_USER = user.email
     getEcuations(user.email)
     loggedInLinks.forEach(item => item.style.display = 'block');
     loggedOutLinks.forEach(item => item.style.display = 'none');
   } else {
+    CURRENT_USER=null
     loggedInLinks.forEach(item => item.style.display = 'none');
     loggedOutLinks.forEach(item => item.style.display = 'block');
     ECUATION_LIST=[];
     var list_elements = document.getElementsByClassName("ecuation-item");
     
     for (let index = 0; index <= list_elements.length;) {
-      console.log(list_elements[index]);
       const element = list_elements[index];
       element.parentNode.removeChild(element);
       
@@ -56,11 +58,16 @@ Createbutton.addEventListener("click", function () {
 
 //add Ecuations
 function addEcuation(ec = null) {
-
     if (ec) {
       var newEcuation = ec
     }else{
       var newEcuation = ECUATION
+    }
+    if (CURRENT_USER != null && ec == null) {
+      db.collection('ecuations').add({
+        user: CURRENT_USER,
+        ecuation: newEcuation
+      })
     }
     ec_quantity += 1;
     var ecu = newEcuation
@@ -93,6 +100,7 @@ function addEcuation(ec = null) {
     a.appendChild(rightArea);
     ul.appendChild(a);
     plot(newEcuation);
+
 }
 //Plotting
 EcuationInput.addEventListener("input", updateName)

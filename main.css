@@ -68,7 +68,13 @@
 }
 .modal-backdrop {
     z-index: -1;
-  }
+}
+
+.enter-btn{
+    color: black;
+    background-color: white;
+    font-size: larger;
+}
 .header-tp .bdr li:nth-child(even) 
 {
 	border-right: 1px solid rgba(255, 255, 255, 0.44);
