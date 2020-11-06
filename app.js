@@ -6,20 +6,70 @@ var ECUATION = "NULL";
 var EcuationInput = document.getElementById("EcInput")
 var ECUATION_LIST = [];
 var registerField = document.getElementById("registerEmail")
+const loggedOutLinks = document.querySelectorAll('.logged-out');
+const loggedInLinks = document.querySelectorAll('.logged-in');
+
+//Listen auth state changes
+auth.onAuthStateChanged(user => {
+  if (user) {
+    getEcuations(user.email)
+    loggedInLinks.forEach(item => item.style.display = 'block');
+    loggedOutLinks.forEach(item => item.style.display = 'none');
+  } else {
+    loggedInLinks.forEach(item => item.style.display = 'none');
+    loggedOutLinks.forEach(item => item.style.display = 'block');
+    ECUATION_LIST=[];
+    var list_elements = document.getElementsByClassName("ecuation-item");
+    
+    for (let index = 0; index <= list_elements.length;) {
+      console.log(list_elements[index]);
+      const element = list_elements[index];
+      element.parentNode.removeChild(element);
+      
+    }
+    console.log('user logged out');
+  }
+})
+
+function getEcuations(user) {
+  var ecuationsRef = db.collection("ecuations");
+  var ecuations = ecuationsRef.where("user", "==", user);
+  ecuations.get().then(snapshot => {
+    snapshot.docs.forEach(doc => {
+      addEcuation(doc.data().ecuation);
+    });
+  });
+}
+
 
 
 //Create
 Createbutton.addEventListener("click", function () {
   var valid = validateEcuation();
   if (valid == true) {
+    addEcuation()
+  } else {
+    alert("Por favor ingrese una función válida")
+  }
+
+})
+
+//add Ecuations
+function addEcuation(ec = null) {
+
+    if (ec) {
+      var newEcuation = ec
+    }else{
+      var newEcuation = ECUATION
+    }
     ec_quantity += 1;
-    var ecu = ECUATION
+    var ecu = newEcuation
     var index = ec_quantity
     var a = document.createElement("a");
-    ECUATION_LIST.push(ECUATION);
+    ECUATION_LIST.push(newEcuation);
     a.className = "list-group-item clearfix ecuation-item";
     a.id = `ecuation_${ec_quantity}`
-    a.appendChild(document.createTextNode(`${ECUATION}`));
+    a.appendChild(document.createTextNode(`${newEcuation}`));
     var rightArea = document.createElement("span");
     rightArea.className = "pull-right";
     var buttonArea = document.createElement("span");
@@ -42,14 +92,8 @@ Createbutton.addEventListener("click", function () {
     rightArea.appendChild(buttonArea);
     a.appendChild(rightArea);
     ul.appendChild(a);
-    plot();
-  } else {
-    alert("Por favor ingrese una función válida")
-  }
-
-})
-
-
+    plot(newEcuation);
+}
 //Plotting
 EcuationInput.addEventListener("input", updateName)
 
