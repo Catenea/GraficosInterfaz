@@ -2,54 +2,115 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <script type="text/javascript" id="MathJax-script" async
+    <script type="text/javascript" id="MathJax-script" async
     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"> </script>
-    <head>
-      <script src=https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.3.0/math.min.js></script>
-  </head>
-  <title>Graficar Ecuaciones</title>
-  <link rel="stylesheet" href="main.css">
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.3.0/math.min.js></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="main.css">
+    <title>Graficar Ecuaciones</title>
 </head>
 
 <body>
-  <nav class="navbar navbar-dark bg-secondary text-white">
-    <img src="Logo-UJAP2.png" alt="Girl in a jacket" width="60" height="60">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="#" id="logout-button">Cerrar Sesión</a>
-      </li>
-    </ul>
-  </nav>
-  <div class="fill container-fluid background-container text-white">
     <div class="row">
-      <div class="col-md-4">
-      <h3>Ecuaciones</h3>
-      <div class="list-group text-dark" id="list-group">     
-      </div>
-      <button id="enter">Add Element</button>
-      </div>
-  <div class="col">
-    <div class="row ecuation-form">
-      <h2>Y=</h2><input type="text" class="form-control ecuation-input" placeholder=" x + 1 (Ejemplo) " id="EcInput"><input class="color-input" type=color id="color">
+        <div class="col-md-12">
+            <header class="header-tp">
+                <nav class="navbar navbar-default navbar-static-top">
+                    <form class="form-inline long">   
+                        <img src="Logo-UJAP2.png" alt="Girl in a jacket" width="60" height="60">
+                        <ul class="nav navbar-nav navbar-right bdr">      
+                            <li><a href="#" data-toggle="modal" data-target="#at-login">Iniciar sesión</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right bdr">      
+                          <li><a href="#" data-toggle="modal" data-target="#at-register">Registrarse</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right bdr">      
+                          <li><a href="#" data-toggle="modal" id="logout">Cerrar sesión</a></li>
+                        </ul>
+                    </form>
+                </nav>       
+            </header>
+        </div>
     </div>
-    <div id="plot" class="graph-container text-dark">
-      <div class="graph " id="myFunction"></div>
+
+    <div class="fill container-fluid background-container text-white">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Ecuaciones</h3>
+                <div class="list-group text-dark" id="list-group"></div>
+                <button id="enter">Add Element</button>
+            </div>
+            <div class="col">
+                <div class="row ecuation-form">
+                    <h2>Y=</h2><input type="text" class="form-control ecuation-input" placeholder=" x + 1 (Ejemplo) " id="EcInput"><input class="color-input" type=color id="color">
+                </div>
+                <div id="plot" class="graph-container text-dark">
+                    <div class="graph " id="myFunction"></div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-    </div>
-    </div>
+
+    <section class="at-login-form">
+        <div class="modal fade" id="at-register" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" >
+                <div class="modal-content" id="HOli">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="signup-form">
+                            <div class="form-group">
+                                <input type="email" class="form-control-form " id="registerEmail"  placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control-form " id="registerPassword" placeholder="Password">
+                            </div>
+                        </form>
+                    </div>
+                    <button type="submit" class="btn-lgin" data-dismiss="modal" id="register-btn">Registrarse</button>        
+                </div>
+            </div>
+        </div>
+      </section>
+
+      <section class="at-login-form">
+        <div class="modal fade" id="at-login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <input type="email" class="form-control-form " id="loginEmail" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control-form" id="loginPassword" placeholder="Password">
+                            </div>
+                        </form>
+                    </div>
+                    <button type="submit" class="btn-lgin" data-dismiss="modal" id="login-btn">Iniciar Sesión</button>        
+                </div>
+            </div>
+        </div>
+      </section>
+
     <script type = "module" src=" app.js "></script>
+    <script type = "module" src=" auth.js "></script>
     <script src="https://mauriciopoppe.github.io/function-plot/js/function-plot.js"></script>
     <noscript>You need to enable JavaScript to view the full site.</noscript>
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
+      <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
 
   <!-- TODO: Add SDKs for Firebase products that you want to use
       https://firebase.google.com/docs/web/setup#available-libraries -->
@@ -75,5 +136,5 @@
 
   </script>
   
-
+       
 </body>

@@ -1,11 +1,14 @@
-
+//Initial vars
 var ec_quantity = 0;
 var Createbutton = document.getElementById("enter");
 var ul = document.getElementById("list-group");
 var ECUATION = "NULL";
 var EcuationInput = document.getElementById("EcInput")
 var ECUATION_LIST = [];
+var registerField = document.getElementById("registerEmail")
 
+
+//Create
 Createbutton.addEventListener("click", function () {
   var valid = validateEcuation();
   if (valid == true) {
@@ -43,11 +46,13 @@ Createbutton.addEventListener("click", function () {
   } else {
     alert("Por favor ingrese una función válida")
   }
-  
+
 })
 
+
+//Plotting
 EcuationInput.addEventListener("input", updateName)
- 
+
 function updateName() {
   ECUATION = document.getElementById("EcInput").value;
   var code = math.compile(ECUATION)
@@ -62,18 +67,18 @@ function validateEcuation() {
     console.log("nope");
     return false;
   }
-  
+
 }
 
 var parameters = {
   target: '#myFunction',
   data: [{
-    fn: 'sin(x)', 
+    fn: 'sin(x)',
     color: 'red'
- }],
+  }],
   grid: true,
-  yAxis: {domain: [-1, 1]},
-  xAxis: {domain: [0, 2*Math.PI]}
+  yAxis: { domain: [-1, 1] },
+  xAxis: { domain: [0, 2 * Math.PI] }
 };
 
 function plot(ec = null) {
@@ -83,18 +88,18 @@ function plot(ec = null) {
   } else {
     var f = ECUATION
   }
-  
+
   var xMin = -5
   var xMax = 5
   var yMin = -5
   var yMax = 5
   var color = document.getElementById("color").value;
-  
+
   parameters.data[0].fn = f;
   parameters.xAxis.domain = [xMin, xMax];
   parameters.yAxis.domain = [yMin, yMax];
   parameters.data[0].color = color;
-  
+
   functionPlot(parameters);
 }
 
